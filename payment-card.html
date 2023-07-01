@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>payment</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header-1>
+    <div class="container-1">
+      <div class="left-1">
+        <h2>BILLING ADDRESS</h2>
+        <form>
+          Full name
+          <input type="text" placeholder="Enter name" required>
+          Email
+          <input type="text" placeholder="Enter email" required>
+          Address
+          <input type="text" placeholder="Enter address" required>
+          City
+          <input type="text" placeholder="Enter city" required>
+          State
+          <input type="text" placeholder="Enter state" required>
+          Zip code
+          <input type="number" placeholder="Enter zipcode" required>
+        </form>
+      </div>
+      <div class="right-1">
+        <h2>PAYMENT</h2>
+        <form>
+          Accepted Card <br><br>
+          <img src="images/payment.png" alt="" width="200px">
+          <br><br>
+          <h1>pay only 50$</h1>
+          <br> <br> <br>
+          <div id="smart-button-container">
+            <div style="text-align: center;">
+              <div id="paypal-button-container"></div>
+        </form>
+      </div>
+    </div>
+  </header-1>
+
+
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD"
+    data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'checkout',
+
+        },
+
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{ "amount": { "currency_code": "USD", "value": 51.5, "breakdown": { "item_total": { "currency_code": "USD", "value": 50 }, "shipping": { "currency_code": "USD", "value": 0 }, "tax_total": { "currency_code": "USD", "value": 1.5 } } } }]
+          });
+        },
+
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (orderData) {
+
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+
+          });
+        },
+
+        onError: function (err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script> 
+</body>
+
+</html>
+
+
+
+<!-- <div id="smart-button-container">
+    <div style="text-align: center;">
+      <div id="paypal-button-container"></div>
+  
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+  function initPayPalButton() {
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'checkout',
+        
+      },
+
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{"amount":{"currency_code":"USD","value":51.5,"breakdown":{"item_total":{"currency_code":"USD","value":50},"shipping":{"currency_code":"USD","value":0},"tax_total":{"currency_code":"USD","value":1.5}}}}]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(orderData) {
+          
+          // Full available details
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // Show a success message within this page, e.g.
+          const element = document.getElementById('paypal-button-container');
+          element.innerHTML = '';
+          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+          // Or go to another URL:  actions.redirect('thank_you.html');
+          
+        });
+      },
+
+      onError: function(err) {
+        console.log(err);
+      }
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header-1>
+  <div class="container-1">
+    <div class="left">
+      <h2>BILLING ADDRESS</h2>
+      <form action="">
+        Full name
+        <input type="text" placeholder="Enter name">
+        Email
+        <input type="text" placeholder="Enter email">
+        Address
+        <input type="text" placeholder="Enter address">
+        city
+        <input type="text" placeholder="Enter city">
+        State
+        <input type="text" placeholder="Enter State">
+        Zip code
+        <input type="text" placeholder="Enter zipcode">
+      </form>
+    </div>
+  </div>
+</header-1>
+
+
+<div id="smart-button-container">
+    <div style="text-align: center;">
+      <div id="paypal-button-container"></div>
+    </div>
+  </div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+  function initPayPalButton() {
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'checkout',
+        
+      },
+
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{"amount":{"currency_code":"USD","value":51.5,"breakdown":{"item_total":{"currency_code":"USD","value":50},"shipping":{"currency_code":"USD","value":0},"tax_total":{"currency_code":"USD","value":1.5}}}}]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(orderData) {
+          
+          // Full available details
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // Show a success message within this page, e.g.
+          const element = document.getElementById('paypal-button-container');
+          element.innerHTML = '';
+          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+          // Or go to another URL:  actions.redirect('thank_you.html');
+          
+        });
+      },
+
+      onError: function(err) {
+        console.log(err);
+      }
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+</script> -->
